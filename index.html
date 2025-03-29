@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Farm Equipment Rental</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+</head>
+<body>
+
+    <div id="navbar-placeholder"></div>
+    <script>
+        fetch('navbar.html')
+            .then(response => response.text())
+            .then(data => document.getElementById('navbar-placeholder').innerHTML = data);
+    </script>
+    
+
+    <!-- Home Page Content -->
+    <div class="container text-center mt-5">
+        <h1>Welcome to the Farm Equipment Rental System</h1>
+        <p class="lead">Choose an option below:</p>
+        
+        <div class="row mt-4">
+            <!-- Give on Rent -->
+            <div class="col-md-6">
+                <div class="card shadow p-4">
+                    <h3>Give on Rent</h3>
+                    <p>Rent out your farm equipment to others and earn money.</p>
+                    <a href="giveonrent.html" class="btn btn-success">Proceed</a>
+                </div>
+            </div>
+
+            <!-- Take on Rent -->
+            <div class="col-md-6">
+                <div class="card shadow p-4">
+                    <h3>Take on Rent</h3>
+                    <p>Find and rent the best farm equipment at affordable prices.</p>
+                    <a href="takeonrent.html" class="btn btn-primary">Proceed</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <div id="footer-placeholder"></div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(function() {
+        $("#footer-placeholder").load("footer.html");
+    });
+</script>
+
+</body>
+</html>
