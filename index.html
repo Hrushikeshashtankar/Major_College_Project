@@ -3,54 +3,59 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Farm Equipment Rental</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <title>Payment</title>
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f8f9fa;
+        }
+        .payment-container {
+            text-align: center;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+    </style>
 </head>
 <body>
-
-    <div id="navbar-placeholder"></div>
-    <script>
-        fetch('navbar.html')
-            .then(response => response.text())
-            .then(data => document.getElementById('navbar-placeholder').innerHTML = data);
-    </script>
-    
-
-    <!-- Home Page Content -->
-    <div class="container text-center mt-5">
-        <h1>Welcome to the Farm Equipment Rental System</h1>
-        <p class="lead">Choose an option below:</p>
-        
-        <div class="row mt-4">
-            <!-- Give on Rent -->
-            <div class="col-md-6">
-                <div class="card shadow p-4">
-                    <h3>Give on Rent</h3>
-                    <p>Rent out your farm equipment to others and earn money.</p>
-                    <a href="giveonrent.html" class="btn btn-success">Proceed</a>
-                </div>
-            </div>
-
-            <!-- Take on Rent -->
-            <div class="col-md-6">
-                <div class="card shadow p-4">
-                    <h3>Take on Rent</h3>
-                    <p>Find and rent the best farm equipment at affordable prices.</p>
-                    <a href="takeonrent.html" class="btn btn-primary">Proceed</a>
-                </div>
-            </div>
-        </div>
+    <div class="payment-container">
+        <h2>Make Payment</h2>
+        <input type="number" id="amount" class="form-control mb-3" placeholder="Enter Amount" required>
+        <button onclick="payNow()" class="btn btn-success">Pay Now</button>
+        <a href="cod.html" class="btn btn-primary mt-3">Go to Order Confirmation</a>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <div id="footer-placeholder"></div>
+    <script>
+        function payNow() {
+            var amount = document.getElementById("amount").value * 100; // Convert to paise (Razorpay uses INR paise)
+            if(amount <= 0) {
+                alert("Please enter a valid amount.");
+                return;
+            }
 
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script>
-    $(function() {
-        $("#footer-placeholder").load("footer.html");
-    });
-</script>
-
+            var options = {
+                "key": "rzp_test_YourKeyHere", // Replace with your Razorpay API Key
+                "amount": amount,
+                "currency": "INR",
+                "name": "Farm Equipment Rental",
+                "description": "Payment for Rental",
+                "handler": function (response) {
+                    alert("Payment Successful! Redirecting...");
+                    window.location.href = "cod.html"; // Redirect to order success page
+                },
+                "prefill": {
+                    "email": "user@example.com"
+                }
+            };
+            var rzp1 = new Razorpay(options);
+            rzp1.open();
+        }
+    </script>
 </body>
 </html>
